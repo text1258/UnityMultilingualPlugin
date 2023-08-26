@@ -160,7 +160,10 @@ namespace MultilingualPlugin
                 if (_multilingualSettings == null)
                 {
                     _multilingualSettings = ScriptableObject.CreateInstance<MultilingualPluginSettings>();
-                    AssetDatabase.CreateFolder("Assets", "Resources");
+                    if (AssetDatabase.IsValidFolder("Assets/Resources") == false)
+                    {
+                        AssetDatabase.CreateFolder("Assets", "Resources");
+                    }
                     AssetDatabase.CreateAsset(_multilingualSettings, multilingualSettingsKey);
                     AssetDatabase.SaveAssets();
                 }
