@@ -8,8 +8,8 @@ namespace MultilingualPlugin
 {
     public static class MultilingualData
     {
-        private const string multilingualSettingsKey = "Packages/com.text1258.unitymultilingualplugin/MultilingualSettings.asset";
-        private static MultilingualPluginSettings _multilingualSettings = new MultilingualPluginSettings();
+        private const string multilingualSettingsKey = "Assets/Resources/MultilingualSettings.asset";
+        private static MultilingualPluginSettings _multilingualSettings;
         private static string _currentLanguegeInPlayMode;
         private static List<bool> _isActiveLanguagesInPlayMode;
 
@@ -160,13 +160,14 @@ namespace MultilingualPlugin
                 if (_multilingualSettings == null)
                 {
                     _multilingualSettings = ScriptableObject.CreateInstance<MultilingualPluginSettings>();
+                    AssetDatabase.CreateFolder("Assets", "Resources");
                     AssetDatabase.CreateAsset(_multilingualSettings, multilingualSettingsKey);
                     AssetDatabase.SaveAssets();
                 }
 #endif
                 if (_multilingualSettings == null)
                 {
-                    _multilingualSettings = Resources.Load<MultilingualPluginSettings>(multilingualSettingsKey);
+                    _multilingualSettings = Resources.Load<MultilingualPluginSettings>("MultilingualSettings");
                 }
                 return _multilingualSettings;
             }
