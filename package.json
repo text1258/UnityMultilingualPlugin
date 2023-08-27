@@ -1,7 +1,7 @@
 {
   "name": "com.text1258.unitymultilingualplugin",
   "author": "Text1258",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "displayName": "Unity Multilingual Plugin",
   "description": "Localization plugin with which you can localize EVERYTHING",
   "dependencies": {

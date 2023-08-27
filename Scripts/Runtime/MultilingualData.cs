@@ -8,7 +8,7 @@ namespace MultilingualPlugin
 {
     public static class MultilingualData
     {
-        private const string multilingualSettingsKey = "Assets/Resources/MultilingualSettings.asset";
+        private const string multilingualSettingsKey = "Packages/com.text1258.unitymultilingualplugin/Resources/MultilingualSettings.asset";
         private static MultilingualPluginSettings _multilingualSettings;
         private static string _currentLanguegeInPlayMode;
         private static List<bool> _isActiveLanguagesInPlayMode;
@@ -155,23 +155,22 @@ namespace MultilingualPlugin
         {
             get
             {
+                if (_multilingualSettings == null)
+                {
+                    _multilingualSettings = Resources.Load<MultilingualPluginSettings>("MultilingualSettings");
+                }
 #if UNITY_EDITOR
-                _multilingualSettings = AssetDatabase.LoadAssetAtPath<MultilingualPluginSettings>(multilingualSettingsKey);
                 if (_multilingualSettings == null)
                 {
                     _multilingualSettings = ScriptableObject.CreateInstance<MultilingualPluginSettings>();
-                    if (AssetDatabase.IsValidFolder("Assets/Resources") == false)
+                    if (AssetDatabase.IsValidFolder("Packages/com.text1258.unitymultilingualplugin/Resources") == false)
                     {
-                        AssetDatabase.CreateFolder("Assets", "Resources");
+                        AssetDatabase.CreateFolder("Packages/com.text1258.unitymultilingualplugin", "Resources");
                     }
                     AssetDatabase.CreateAsset(_multilingualSettings, multilingualSettingsKey);
                     AssetDatabase.SaveAssets();
                 }
 #endif
-                if (_multilingualSettings == null)
-                {
-                    _multilingualSettings = Resources.Load<MultilingualPluginSettings>("MultilingualSettings");
-                }
                 return _multilingualSettings;
             }
         }
