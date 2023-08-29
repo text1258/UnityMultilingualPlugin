@@ -1,6 +1,8 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using static MultilingualPlugin.MultilingualData;
 
 namespace MultilingualPlugin
@@ -18,6 +20,10 @@ namespace MultilingualPlugin
 
         public override void OnGUI(string searchContext)
         {
+            if (Application.isPlaying)
+            {
+                GUI.enabled = false;
+            }
             EditorGUI.BeginChangeCheck();
             CurrentLanguageIndex = EditorGUILayout.Popup("CurrentLanguage", CurrentLanguageIndex, Languages.ToArray());
             EditorGUILayout.LabelField("What languages do you want to use in the plugin");
